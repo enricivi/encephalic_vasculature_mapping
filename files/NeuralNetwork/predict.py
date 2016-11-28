@@ -144,7 +144,7 @@ def main():
     #parser.add_argument('jpg_file', type=str, help="path to jpg file to predict")
     parser.add_argument('h5_file', type=str, help="path to h5 file to predict")
     parser.add_argument('h5_set', type=str, help="choose the set inside the h5 file",
-                        choices=['train', 'test', 'all_test', 'all_train'])
+                        choices=['train', 'test', 'all_predict', 'all_train'])
     parser.add_argument('-s', '--stride', type=int, help="Stride dimension", default=None)
 
     args = parser.parse_args()
