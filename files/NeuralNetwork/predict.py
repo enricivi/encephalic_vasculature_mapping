@@ -132,8 +132,7 @@ def segment(samples, model, gpu_mem=10, save_file=None, stride=None):
     print end
 
     if (save_file != None):
-        for i in xrange(all_pred.shape[0]):
-            tf.imsave(save_file + str(i) + ".tif", all_pred[i]*255.0)
+        tf.imsave(save_file + 'preds' + ".tif", all_pred*255.0)
 
     return all_pred   
 
@@ -141,7 +140,7 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('model_file', type=str, help="Model (yaml) file")
     parser.add_argument('weights_file', type=str, help="Weights file")
-    parser.add_argument("output_file", type= str, help="directory to save the predicted images")
+    parser.add_argument("output_file", type= str, help="directory to save the predicted image")
     #parser.add_argument('jpg_file', type=str, help="path to jpg file to predict")
     parser.add_argument('h5_file', type=str, help="path to h5 file to predict")
     parser.add_argument('h5_set', type=str, help="choose the set inside the h5 file",
