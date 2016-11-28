@@ -105,7 +105,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("adjacent_list", type=str, help="path to adjacent list (XML)")
     parser.add_argument("position_list", type=str, help="path to position list (XML)")
-    parser.add_argument("bandwidth", type=float, help="bandwidth used in the RBF kernel")
+    parser.add_argument("bandwidth", type=float, help="bandwidth used in the RBF kernel (mean-shift)")
     parser.add_argument("output", type=str, help="path to output folder")
     args = parser.parse_args()
     main(args.adjacent_list, args.position_list, args.bandwidth, args.output)
