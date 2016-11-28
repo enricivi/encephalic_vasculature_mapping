@@ -17,7 +17,7 @@ sets = {
             'starts':  [10, 0, 0],
             'ends': [None, None, None]
         }],
-        'all_test':
+        'all_predict':
         [{
             'starts': [0, 0, 0],
             'ends': [None, None, None]
@@ -59,7 +59,7 @@ class VascularData(object):
 
         #{'starts': [z0, x0,y0], 'ends':[z1,x1,y1]}
         assert filename is not None 
-        assert (which_set in ['train', 'test', 'all_test', 'all_train'] or range_ is not None)
+        assert (which_set in ['train', 'test', 'all_predict', 'all_train'] or range_ is not None)
         assert (type(p_shape) == list or type(p_shape) == tuple)
 
 
@@ -79,7 +79,7 @@ class VascularData(object):
             ze, xe, ye = r['ends']
             if self.X is None:
                 self.X = h5file['X'][zs:ze, xs:xe, ys:ye]
-                if (which_set != "all_test"):
+                if (which_set != "all_predict"):
                     self.y = h5file['y'][zs:ze, xs:xe, ys:ye]
                 if self.y is None:
                     self.y = self.X
@@ -87,7 +87,7 @@ class VascularData(object):
                 # self.y = h5file['y'][zs:ze, xs:xe, ys:ye]
             else:
                 self.X = np.vstack((self.X, h5file['X'][zs:ze, xs:xe, ys:ye]))
-                if (which_set != "all_test"):
+                if (which_set != "all_predict"):
                     self.y = np.vstack((self.y, h5file["y"][zs:ze, xs:xe, ys:ye]))
                 if self.y is None:
                     self.y = self.X
