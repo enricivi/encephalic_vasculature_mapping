@@ -133,7 +133,7 @@ def main():
                         choices=['train', 'test', 'all_test', 'all_train'], required= True)
     parser.add_argument('-p', '--patch_size', type=tuple, help='Size of the patch. It can be either a single integer or a tuple.', required=True)
     parser.add_argument('-d', '--conv_dim', type=int, help='Convolution dimension', choices=[2,3], default=2)
-    parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=1000)
+    parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=20)
     parser.add_argument('-n', '--nb_minibatches', type=int, help='Number of minibatch per epoch', default=25000)
     args = parser.parse_args()   
 
