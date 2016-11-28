@@ -4,35 +4,15 @@ import os
 import warnings
 import numpy as np
 import tifffile as tf
-#from scipy.misc import imsave, imread
-
-def order_file(a, b):
-    pattern= r"[^0-9]"
-    a= re.sub(pattern, '', a)
-    b= re.sub(pattern, '', b)
-    if ( long(a) > long(b) ):
-        return 1
-    elif ( long(a) < long(b) ):
-        return -1
-    return 0
 
 def main(input, output, z):
-    print "opening images and creating stacks..."
-    file = sorted( os.listdir(input), cmp=order_file )
-    im_stack = None
-    for i in xrange( len(file) ):
-        f = file[i]
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore")
-            if im_stack == None:
-                mono_shape = imread(input + f).shape
-                im_stack = np.empty( (len(file), mono_shape[0], mono_shape[1]) )
-        im_stack[i] = tf.imread(input + f)
-        #im_stack[i] = imread(input + f)
+    print "opening images..."
+    im_stack = tf.imread(input)
 
     print "overlapping image and saving..."
-    tmp_dx= None
-    tmp_sx= None
+    tmp_out = np.empty(im_stack.shape) 
+    tmp_dx = None
+    tmp_sx = None
     for i in xrange( len(im_stack) ):
         if (i >= z) and (i < (len(im_stack)-z)):
             tmp_dx = im_stack[i:i+z+1,:,:]
@@ -49,13 +29,13 @@ def main(input, output, z):
         tmp= np.empty((2, tmp_dx.shape[0], tmp_dx.shape[1]))
         tmp[0]= tmp_dx
         tmp[1]= tmp_sx
-        tf.imsave(output+str(i)+".tif", np.amax(tmp, axis=0))
-        #imsave(output+str(i)+".jpg", np.amax(tmp, axis=0))
+        tmp_out[i]= np.amax(tmp, axis=0)
+    tf.imsave(output+"overlap.tif", tmp_out)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("input", type= str, help="path to input images (TIF)")
-    parser.add_argument("output", type= str, help= "where the output images (TIF) will be saved")
+    parser.add_argument("input", type= str, help="path to input image (TIF)")
+    parser.add_argument("output", type= str, help= "where the output image (TIF) will be saved")
     parser.add_argument("z", type= int, help="how many images the script used to overlap (+ -), must be >= 1")
 
     args = parser.parse_args()
