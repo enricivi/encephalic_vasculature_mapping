@@ -9,8 +9,6 @@ def main(input, output):
     im_stack= tf.imread(input)
     print "median filter..."
     im_stack = medfilt(im_stack)
-    print "convert in np.uint8..."
-    im_stack = im_stack.astype(np.uint8)
     print "evaluating threshold..."
     for i in xrange( len(im_stack) ):
         im = im_stack[i]
@@ -21,6 +19,8 @@ def main(input, output):
         invert = np.ones(im.shape) * maximum
         im_stack[i] = invert - im - np.ones(im.shape)
         '''
+    print "convert in np.uint8..."
+    im_stack = im_stack.astype(np.uint8)
     print "save result..."
     tf.imsave(output + "prep_vasculature.tif", im_stack, compress=0)
 
