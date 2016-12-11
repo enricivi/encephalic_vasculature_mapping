@@ -130,7 +130,7 @@ def main():
     parser.add_argument('model_prefix', type=str, help='Model folder')
     parser.add_argument('-h5', '--h5_file', type= str, help="path to h5 file used for training", required= True)
     parser.add_argument('-s', '--h5_set', type= str, help="choose the set inside the h5 file",
-                        choices=['train', 'test', 'all_test', 'all_train'], required= True)
+                        choices=['train', 'test', 'all_predict', 'all_train'], required= True)
     parser.add_argument('-p', '--patch_size', type=tuple, help='Size of the patch. It can be either a single integer or a tuple.', required=True)
     parser.add_argument('-d', '--conv_dim', type=int, help='Convolution dimension', choices=[2,3], default=2)
     parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=20)
