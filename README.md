@@ -1,6 +1,16 @@
 # EncephalicVasculatureMapping
 This work aims to explore a new approach to model the encephalic vasculature using the formalism of graphs that naturally fit the structure of blood vessels.
 
+It is necessary to install:   
+- Keras with TensorFlow backend  
+- h5py  
+- scipy  
+- sklearn  
+- numpy  
+- tifffile  
+- argparse  
+- progressbar  
+
 To obtain the graph follow the procedure below:
 
 0) If necessary make_train_set.py (folder: augment-train-set) performs an augmenting operation over the train-set  
