@@ -51,6 +51,7 @@ def create_autoencoder(model_folder, patch_size):
             Reshape([1] + patch_size),
             Activation('sigmoid')
         ]
+    '''
     if len(patch_size) == 3:
         encoder = [
                 Convolution3D(32, 7, 7, 7, input_shape = [1] + patch_size, border_mode='same', init='he_normal'), PReLU(),
@@ -66,7 +67,7 @@ def create_autoencoder(model_folder, patch_size):
                 Convolution3D(1, 7, 7, 7, border_mode='same', init='he_normal'), PReLU(),
                 Activation('sigmoid')
             ]
-
+    '''   
     model = Sequential()
     for l in encoder:
         model.add(l)
@@ -132,7 +133,7 @@ def main():
     parser.add_argument('-s', '--h5_set', type= str, help="choose the set inside the h5 file",
                         choices=['train', 'test', 'all_predict', 'all_train'], required= True)
     parser.add_argument('-p', '--patch_size', type=tuple, help='Size of the patch. It can be either a single integer or a tuple.', required=True)
-    parser.add_argument('-d', '--conv_dim', type=int, help='Convolution dimension', choices=[2,3], default=2)
+    parser.add_argument('-d', '--conv_dim', type=int, help='Convolution dimension', choices=[2], default=2)
     parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=20)
     parser.add_argument('-n', '--nb_minibatches', type=int, help='Number of minibatch per epoch', default=25000)
     args = parser.parse_args()   
