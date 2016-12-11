@@ -3,7 +3,8 @@ This work aims to explore a new approach to model the encephalic vasculature usi
 
 To obtain the graph follow the procedure below:
 
-0) If necessary make_train_set.py (folder: augment-train-set) performs an augmenting operation over the train-set \n
+0) If necessary make_train_set.py (folder: augment-train-set) performs an augmenting operation over the train-set
+
 1) Use train_vascular.py to train the neural network
 2) Use predict.py to segment the images
 3) It is possibile to use overlap_img.py (folder: pre-process-denoising) to overlap the predicted image (It is possibile that    this operation reduces the noise)
